@@ -1,89 +1,66 @@
-# Document Processor with Upstage.ai
+# Document to Neon Database Uploader
 
-This application allows you to upload various document types (PDF, DOCX, PPTX, XLSX) and extract their content, including text, tables, and images using Upstage.ai's document processing capabilities.
+This application allows you to upload PDF and Word documents to your Neon Database with vector embeddings for semantic search capabilities.
 
 ## Features
 
-- Support for multiple document formats (PDF, DOCX, PPTX, XLSX)
-- Text extraction
-- Table extraction and display
-- Image extraction and preview
-- Modern web interface
-- Real-time processing feedback
+- Support for PDF and DOCX formats
+- Automatic text extraction
+- OpenAI embedding generation
+- Vector storage in Neon Database (using pgvector)
+- Document chunking for large files
+- User-friendly Streamlit interface
 
 ## Prerequisites
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
-- Upstage.ai API key
+- Python 3.8 or higher
+- OpenAI API key
+- Neon Database account and connection string
 
 ## Setup
 
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd document-processor
+cd neondatabaseuploading
 ```
 
 2. Install dependencies:
 ```bash
-npm install
+pip install -r requirements.txt
 ```
 
-3. Create a `.env` file in the root directory and add your Upstage.ai API key:
+3. Create a `.env` file in the root directory and add your OpenAI API key:
 ```
-UPSTAGE_API_KEY=your_api_key_here
-```
-
-4. Create the required directories:
-```bash
-mkdir uploads
-mkdir public
+OPENAI_API_KEY=your_openai_api_key_here
 ```
 
 ## Running the Application
 
-1. Start the development server:
+1. Start the Streamlit app:
 ```bash
-npm run dev
+streamlit run app.py
 ```
 
-2. Open your browser and navigate to:
-```
-http://localhost:3000
-```
+2. Open your browser and navigate to the displayed URL (typically http://localhost:8501)
 
 ## Usage
 
-1. Click the "Choose File" button to select a document
-2. Click "Process Document" to start the extraction
-3. Wait for the processing to complete
-4. View the extracted content:
-   - Text content will be displayed at the top
-   - Tables will be shown in a formatted view
-   - Images will be displayed with previews
+1. Upload your PDF or Word document
+2. Enter your Neon Database connection string
+3. Choose to create a new table or use an existing one
+4. Process the document and store it with vector embeddings
 
-## Supported File Types
+## Deployment on Streamlit Cloud
 
-- PDF (.pdf)
-- Microsoft Word (.docx)
-- Microsoft PowerPoint (.pptx)
-- Microsoft Excel (.xlsx)
+1. Push your code to GitHub
+2. Sign in to [Streamlit Cloud](https://streamlit.io/cloud)
+3. Create a new app pointing to your repository
+4. Add the OPENAI_API_KEY as a secret in the Streamlit Cloud settings
+5. Deploy the app
 
-## Error Handling
+## Notes
 
-The application includes error handling for:
-- Invalid file types
-- Processing errors
-- API connection issues
-- File upload failures
-
-## Security
-
-- Files are temporarily stored in the `uploads` directory and automatically deleted after processing
-- API keys are stored securely in environment variables
-- Input validation is performed on all file uploads
-
-## Contributing
-
-Feel free to submit issues and enhancement requests! 
+- Ensure your Neon Database has pgvector extension enabled
+- Large documents will be automatically split into chunks
+- Each chunk will have its own vector embedding 
