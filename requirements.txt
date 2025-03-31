@@ -1,0 +1,9 @@
+streamlit
+psycopg2
+pandas
+python-docx
+PyPDF2
+tiktoken
+openai
+numpy
+python-dotenv
